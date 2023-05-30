@@ -2,7 +2,7 @@ run-name: Build and push container to ghcr.io.
 on:
     workflow_dispatch:
     schedule:
-        - cron: '0 3/8 * * *'
+        - cron: '0 2,14 * * *'
 jobs:
     build-container:
         runs-on: ubuntu-latest
@@ -12,10 +12,3 @@ jobs:
                 docker build --pull --no-cache --file devtools.dockerfile --tag ghcr.io/mortyr45/archlinux:devtools .
                 echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
                 docker push ghcr.io/mortyr45/archlinux:devtools
-            - uses: macbre/push-to-ghcr@v12
-              with:
-                github_token: ${{ secrets.GITHUB_TOKEN }}
-                image_name: mortyr45/container-archlinux
-                image_tag: devtools
-                dockerfile: devtools.dockerfile
-                context: .

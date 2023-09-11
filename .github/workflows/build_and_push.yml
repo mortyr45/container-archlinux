@@ -7,7 +7,7 @@ jobs:
     build-container:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
             - run: |
                 docker build --pull --no-cache --file devtools.dockerfile --tag ghcr.io/mortyr45/archlinux:devtools .
                 echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
